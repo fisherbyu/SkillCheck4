@@ -8,7 +8,7 @@ namespace Mission09_jazz3987.Models
 	{
 		public List<CartLineItem> Items { get; set; } = new List<CartLineItem>();
 
-		public string RecentItem { get; set; } // Get recently added item and save to cart
+		public string RecentItem { get; set; } // Store added item and save to cart
 
 		public void AddItem(Book book, int qty)
 		{
@@ -16,7 +16,7 @@ namespace Mission09_jazz3987.Models
 				.Where(b => b.Book.BookId == book.BookId)
 				.FirstOrDefault();
 
-			RecentItem = book.Title;
+			RecentItem = book.Title; // Set recent item
 
 			if (line == null)  // Add item if not in the shopping cart
 			{
