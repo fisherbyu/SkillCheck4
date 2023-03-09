@@ -20,7 +20,7 @@ namespace Mission09_jazz3987.Controllers
             repo = temp;
         }
 
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string category, int pageNum = 1)
         {
             int pageSize = 10;
 
@@ -28,13 +28,16 @@ namespace Mission09_jazz3987.Controllers
             {
                 // Load up variables from view model
                 Books = repo.Books
+                .Where(x => x.Category == category || category == null)
                 .OrderBy(x => x.Title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
-
+                // Adjust page numbers based on category
                 PageInfo = new PageInfo
                 {
-                    TotalNumBooks = repo.Books.Count(),
+                    TotalNumBooks = (category == null
+                    ? repo.Books.Count()
+                    : repo.Books.Where(x => x.Category == category).Count()),
                     BooksPerPage = pageSize,
                     CurrPage = pageNum
                 }
