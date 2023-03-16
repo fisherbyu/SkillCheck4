@@ -36,11 +36,17 @@ namespace Mission09_jazz3987
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
 
+            services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
+
             services.AddRazorPages();
             //Setup sessions
             services.AddDistributedMemoryCache();
 
             services.AddSession();
+
+            services.AddScoped<ShoppingCart>(x => SessionShoppingCart.GetShoppingCart(x));
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
         }
 

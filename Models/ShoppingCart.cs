@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Mission09_jazz3987.Models
@@ -10,7 +11,7 @@ namespace Mission09_jazz3987.Models
 
 		public string RecentItem { get; set; } // Store added item and save to cart
 
-		public void AddItem(Book book, int qty)
+		public virtual void AddItem(Book book, int qty)
 		{
 			CartLineItem line = Items
 				.Where(b => b.Book.BookId == book.BookId)
@@ -34,6 +35,16 @@ namespace Mission09_jazz3987.Models
 			}
 		}
 
+		public virtual void RemoveItem(Book book) //Remove book with matching ID
+		{
+			Items.RemoveAll(x => x.Book.BookId == book.BookId);
+		}
+
+		public virtual void ClearCart() // Clear entire cart
+		{
+			Items.Clear();
+		}
+
         public decimal CalcTotal()
 		{
 			decimal sum = Items.Sum(x => x.Quantity * x.Book.Price);
@@ -45,7 +56,8 @@ namespace Mission09_jazz3987.Models
     }
 
 	public class CartLineItem
-	{
+	{ 
+		[Key] //Set key to create another table
 		public int LineID { get; set; }
 
 		public Book Book { get; set; }

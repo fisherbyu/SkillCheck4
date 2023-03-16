@@ -20,6 +20,6 @@ namespace Mission09_jazz3987.Models
         }
 
         public DbSet<Book> Books { get; set; }
-
+        public DbSet<Purchase> Purchases { get; set; }
     }
 }

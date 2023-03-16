@@ -4,9 +4,13 @@
 }
 
 <h2>Your Shopping Cart</h2>
-<div class="alert alert-primary" role="alert">
-    @Model.shoppingCart.RecentItem added! <!--Bootstrap 2: Show alert that the selected book was added to the cart-->
-</div>
+
+@if (@Model.shoppingCart.Items.Count() > 0)
+{
+    <div class="alert alert-primary" role="alert">
+        @Model.shoppingCart.RecentItem added! <!--Bootstrap 2: Show alert that the selected book was added to the cart-->
+    </div>
+}
 
 <table class="table table-bordered table-striped">
 
@@ -27,6 +31,14 @@
                 <td>@i.Quantity</td>
                 <td>@i.Book.Price</td>
                 <td>@(i.Quantity * i.Book.Price)</td>
+
+                <td class="text-center">
+                    <form method="post" asp-page-handler="Remove"> <!--Needed to redirect to remove page-->
+                        <input type="hidden" name="bookId" value="@i.Book.BookId" />
+                        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
@@ -41,4 +53,5 @@
 
 <div>
     <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
+    <a class="btn btn-primary" asp-controller="Checkout" asp-action="Checkout" >Checkout</a>
 </div>
