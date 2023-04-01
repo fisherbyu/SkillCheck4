@@ -26,7 +26,7 @@
     <Folder Include="wwwroot\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Shared\" />
-    <Folder Include="Infrastructure \" />
+    <Folder Include="Infrastructure\" />
     <Folder Include="Models\ViewModels\" />
     <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\lib\twitter-bootstrap\" />
