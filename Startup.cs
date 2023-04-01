@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Mission09_jazz3987.Models;
+using MySql.EntityFrameworkCore;
 
 namespace Mission09_jazz3987
 {
@@ -31,7 +32,7 @@ namespace Mission09_jazz3987
 
             services.AddDbContext<BookstoreContext>(options =>
             {
-                options.UseSqlite(Configuration["ConnectionStrings:BookstoreDBConnection"]);
+                options.UseMySQL(Configuration["ConnectionStrings:BookstoreDBConnection"]);
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
